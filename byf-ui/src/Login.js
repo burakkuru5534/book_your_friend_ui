@@ -1,5 +1,6 @@
 import React from 'react';
-import Cookies from 'universal-cookie';
+import axios from "axios";
+
 import {
   MDBBtn,
   MDBContainer,
@@ -18,7 +19,6 @@ import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
-    const cookies = new Cookies();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isPending, setIsPending] = useState(false); 
@@ -32,17 +32,18 @@ const Login = () => {
         e.preventDefault(); // to prevent refresh 
         const login = { email, password } 
 
-        fetch('http://localhost:8080/api/usr/login',{
-            method: 'POST',
-            headers: { "Content-Type": "application/json","Access-Control-Allow-Origin":"*" },
-            body: JSON.stringify(login)
-        }).then(res => res.json()).then(res => {
-            let token = res.AccessToken
+        axios.post('http://localhost:8080/v1/login',{
+            email:email,
+            password:password
+
+        }).then((res) => {
+          console.log(res);
+          let token = res.data.AccessToken
             console.log(token);
                 setIsPending(false);
                 navigate('/');
-                localStorage.setItem("token", JSON.stringify(token));
-               // history.go(-1); we can go back and forward with this function
+                localStorage.setItem("token", token);
+                console.log(localStorage.getItem("token"));
         })
     }
 

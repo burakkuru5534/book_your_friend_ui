@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 const useFetch = (url) => {
 
@@ -8,25 +9,15 @@ const useFetch = (url) => {
 
     useEffect(() => {
         setTimeout(() => { 
-        fetch(url, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'token': localStorage.getItem('token')
-            },
-            method: 'GET',
-        })
-        .then(res => {
-            if (!res.ok) {
-                throw Error('could not get the data for that resource')
-            }
-            return res.json();
-        })
-        .then(data => {
-            setData(data);
-            setIsPending(false);
-            setError(null);
-        })
+            axios.get(url,{
+                headers: {
+                   Authorization : `Bearer ${localStorage.getItem("token")}`
+                   }
+              }).then((response) => {
+                setData(response.data);
+                setIsPending(false);
+                setError(null);
+              })
         .catch(err => {
             if (err.name === 'AbortError'){
                 console.log('fetch aborted');

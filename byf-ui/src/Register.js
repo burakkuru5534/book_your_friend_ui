@@ -15,6 +15,7 @@ import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
 
+
 const Register = () => {
 
     const [firstName, setFirstName] = useState('');
@@ -37,12 +38,11 @@ const Register = () => {
             body: JSON.stringify(register)
         }).then(() => {
                 setIsPending(false);
-                navigate('/');
+                navigate('/registersuccess');
                // history.go(-1); we can go back and forward with this function
         })
     }
-
-
+  
   return (
     <MDBContainer className="register" fluid>
 
@@ -51,7 +51,7 @@ const Register = () => {
           <MDBRow>
             <MDBCol md='10' lg='6' className='order-2 order-lg-1 d-flex flex-column align-items-center'>
 
-              <p classNAme="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+              <p classNAme="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up to Book your Friend!</p>
 
               <div className="d-flex flex-row align-items-center mb-4 ">
                 <MDBIcon fas icon="user me-3" size='lg'/>

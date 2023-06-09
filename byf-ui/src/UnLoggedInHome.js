@@ -23,9 +23,12 @@ const  UnLoggedInHome = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [loginEmail, setLoginEmail] = useState('');
   const [gsm, setGsm] = useState('');
   const [usrName, setUserName] = useState('');
   const [password, setPassword] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+
   const [isPending, setIsPending] = useState(false); 
   const navigate = useNavigate();
 
@@ -33,20 +36,24 @@ const  UnLoggedInHome = () => {
 
     setIsPending(true);
     e.preventDefault(); // to prevent refresh 
-    const login = { email, password } 
+    const login = { loginEmail, loginPassword } 
 
     axios.post('http://localhost:8080/v1/login',{
-        email:email,
-        password:password
+        email:loginEmail,
+        password:loginPassword
 
     }).then((res) => {
       console.log(res);
       let token = res.data.AccessToken
+      let userName = res.data.UserFullName
         console.log(token);
             setIsPending(false);
             navigate('/home');
             localStorage.setItem("token", token);
+            localStorage.setItem("username",userName);
             console.log(localStorage.getItem("token"));
+            console.log(localStorage.getItem("username"));
+
     })
 }
 
@@ -62,7 +69,9 @@ const  UnLoggedInHome = () => {
           body: JSON.stringify(register)
       }).then(() => {
               setIsPending(false);
-              navigate('/registersuccess');
+              alert("Successfully registered! Check your email.")
+              window.location.reload(true);
+             // navigate('/registersuccess');
               // history.go(-1); we can go back and forward with this function
       })
   }
@@ -95,14 +104,14 @@ const  UnLoggedInHome = () => {
         <MDBTabsPane show={justifyActive === 'tab1'}>
 
         
-          <MDBInput wrapperClass='mb-4' label='Email address' id='form1' type='email'  value = { email }
-                onChange = {(e) => setEmail(e.target.value)}/>
-          <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password' value = { password }
-                onChange = {(e) => setPassword(e.target.value)}/>
+          <MDBInput wrapperClass='mb-4' label='Email address' id='form1' type='email'  value = { loginEmail }
+                onChange = {(e) => setLoginEmail(e.target.value)}/>
+          <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password' value = { loginPassword }
+                onChange = {(e) => setLoginPassword(e.target.value)}/>
 
           <div className="d-flex justify-content-between mx-4 mb-4">
             <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
-            <a href="" onClick={navigate('/forgetpassword')}>Forgot password?</a>
+            <a href="">Forgot password?</a>
           </div>
 
           <MDBBtn className="mb-4 w-100" onSubmit={handleLogin} onClick={handleLogin}>Sign in</MDBBtn>

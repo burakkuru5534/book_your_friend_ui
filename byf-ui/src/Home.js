@@ -9,7 +9,7 @@ const Home = () => {
    <div className="home">
        {error && <div> {error} </div>}
        {isPending && <div>Loading...</div>}
-      {posts && <PostList posts={posts} title="All posts!"/>}
+      {posts && <PostList posts={posts} title="All posts!" userName = {localStorage.getItem("username")}/>}
    </div>
 );
  

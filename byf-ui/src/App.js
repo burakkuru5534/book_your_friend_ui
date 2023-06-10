@@ -6,13 +6,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from './Login';
 import UnLoggedInHome from './UnLoggedInHome';
 import ForgetPassword from './ForgetPassword';
-import Navbar from './Navbar';
 import PostCreate from './PostCreate';
+import PostDetails from './PostDetail';
 function App() {
   return (
     <BrowserRouter>
     <div className="content">
-    <Navbar/>
     <Routes>
       <Route path="/" element={<UnLoggedInHome />}>
       </Route>
@@ -30,6 +29,9 @@ function App() {
       </Route>
       <Route>
       <Route path="/post/create" element={<PostCreate />} />
+      </Route>
+      <Route>
+      <Route path="/usr/post/:id" element={<PostDetails />} />
       </Route>
     </Routes>
     </div>

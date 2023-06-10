@@ -10,8 +10,7 @@ const PostList = ({ posts, title, userName }) => {
                 
                 <div className="post-preview" key={post.id}>
                    <Link to = {`/usr/post/${post.id}`}>
-                   <h2>{post.content}</h2>
-                   <h3>{`${post.is_active}`}</h3>
+                   <h2>{post.title}</h2>
                    </Link>
                 </div>
                 

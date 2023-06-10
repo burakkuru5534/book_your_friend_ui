@@ -54,15 +54,15 @@
 }
 
 /* blog details page */
-.blog-details h2 {
+.post-details h2 {
   font-size: 20px;
   color: #f1356d;
   margin-bottom: 10px;
 }
-.blog-details div {
+.post-details div {
   margin: 20px 0;
 }
-.blog-details button {
+.post-details button {
   background: #f1356d;
   color: #fff;
   border: 0;

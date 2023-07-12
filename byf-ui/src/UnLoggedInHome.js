@@ -28,6 +28,9 @@ const  UnLoggedInHome = () => {
   const [usrName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
+  const current = new Date().toISOString().split("T")[0]
+
 
   const [isPending, setIsPending] = useState(false); 
   const navigate = useNavigate();
@@ -61,7 +64,8 @@ const  UnLoggedInHome = () => {
 
       setIsPending(true);
       e.preventDefault(); // to prevent refresh 
-      const register = {firstName, lastName, email, gsm, usrName, password} 
+      const register = {firstName, lastName, email, gsm, usrName, password, dateOfBirth} 
+
 
       fetch('http://localhost:8080/v1/register',{
           method: 'POST',
@@ -110,8 +114,6 @@ const  UnLoggedInHome = () => {
                 onChange = {(e) => setLoginPassword(e.target.value)}/>
 
           <div className="d-flex justify-content-between mx-4 mb-4">
-            <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
-            <a href="">Forgot password?</a>
           </div>
 
           <MDBBtn className="mb-4 w-100" onSubmit={handleLogin} onClick={handleLogin}>Sign in</MDBBtn>
@@ -137,6 +139,12 @@ const  UnLoggedInHome = () => {
           <MDBInput wrapperClass='mb-4' label='Password' id='form1' type='password'          required
                 value = { password }
                 onChange = {(e) => setPassword(e.target.value)}/>
+                <MDBInput type='date'
+      placeholder='Enter BirthDate'
+      value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)}
+      name='birthdate'
+      max={current}
+    />
 
           <div className='d-flex justify-content-center mb-4'>
             <MDBCheckbox name='flexCheck' id='flexCheckDefault' label='I have read and agree to the terms' />

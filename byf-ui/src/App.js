@@ -8,10 +8,13 @@ import UnLoggedInHome from './UnLoggedInHome';
 import ForgetPassword from './ForgetPassword';
 import PostCreate from './PostCreate';
 import PostDetails from './PostDetail';
+import Navbar from './Navbar';
 function App() {
   return (
     <BrowserRouter>
     <div className="content">
+    <Navbar/>
+
     <Routes>
       <Route path="/" element={<UnLoggedInHome />}>
       </Route>

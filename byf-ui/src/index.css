@@ -7,10 +7,10 @@
   color: #333;
 }
 .navbar {
-  padding: 20px;
+  padding: 10px 20px!important;
   display: flex;
   align-items: center;
-  max-width: 600px;
+  /* max-width: 600px; */
   margin: 0 auto;
   border-bottom: 1px solid #f2f2f2;
 }
@@ -27,11 +27,6 @@
 }
 .navbar a:hover {
   color: #f1356d;
-}
-.content {
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 20px;
 }
 
 /* post previews / list */

@@ -1,14 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import TagsInput from 'react-tagsinput';
+import 'react-tagsinput/react-tagsinput.css';
+
+
+
 
 const PostCreate = () => {
 
     const [content, setContent] = useState('');
-    const [title, setTitle] = useState('');
+    const [title, setTitle] = useState([]);
     const [isActive, setisActive] = useState(false);
     const [isPending, setIsPending] = useState(false); 
     const navigate = useNavigate();
+
+    const [tags,setTag] = useState([]); 
 
     const handleSubmit = (e) => {
 
@@ -19,7 +26,8 @@ const PostCreate = () => {
         const data = {
             content:content,
             title:title,
-            isActive:isActive
+            isActive:isActive,
+            tag:tags
         }
         setIsPending(true);
         e.preventDefault(); // to prevent refresh 
@@ -42,10 +50,12 @@ const PostCreate = () => {
                 <input 
                 type="text"
                 required
-                value = { title }
+                value={title}
                 onChange = {(e) => setTitle(e.target.value)}
                 >
                 </input>
+                <label>tag add</label>
+                <TagsInput value={tags} onChange={setTag} />
                 <label>Post Content:</label>
                 <textarea 
                 required

@@ -2,6 +2,7 @@
 
 import Register from './Register';
 import Home from './Home';
+import Profile from './Profile';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from './Login';
 import UnLoggedInHome from './UnLoggedInHome';
@@ -26,6 +27,9 @@ function App() {
       </Route>
       <Route>
       <Route path="/home" element={<Home />} />
+      </Route>
+      <Route>
+      <Route path="/profile" element={<Profile/>} />
       </Route>
       <Route>
       <Route path="/forgetpassword" element={<ForgetPassword />} />

@@ -12,6 +12,8 @@ const Profile = () => {
 
    return (
       <div className="profile">
+         {error && <div> {error} </div>}
+         {isPending && <div>Loading...</div>}
          <div class="container">
             <div class="row">
                <div class="col-md-12">
@@ -30,11 +32,12 @@ const Profile = () => {
                               </div>
                            </div>
                            <ul class="profile-header-tab nav nav-tabs">
-                              <li class="nav-item"><a href="https://www.bootdey.com/snippets/view/bs4-profile-with-timeline-posts" target="__blank" class="nav-link_">POSTS</a></li>
+                              <li class="nav-item"><a href="http://localhost:3000/post/create" target="__blank" class="nav-link_">New Post</a></li>
                               <li class="nav-item"><a href="https://www.bootdey.com/snippets/view/bs4-profile-about" target="__blank" class="nav-link_">ABOUT</a></li>
                               <li class="nav-item"><a href="https://www.bootdey.com/snippets/view/profile-photos" target="__blank" class="nav-link_">PHOTOS</a></li>
                               <li class="nav-item"><a href="https://www.bootdey.com/snippets/view/profile-videos" target="__blank" class="nav-link_">VIDEOS</a></li>
-                              <li class="nav-item"><a href="https://www.bootdey.com/snippets/view/bs4-profile-friend-list" target="__blank" class="nav-link_ active show">FRIENDS</a></li>
+                              <li class="nav-item"><a href="https://www.bootdey.com/snippets/view/bs4-profile-friend-list" target="__blank" class="nav-link_">FRIENDS</a></li>
+
                            </ul>
                         </div>
                      </div>
@@ -46,8 +49,8 @@ const Profile = () => {
                                     <li>
                                        <div class="timeline-time">
                                           <span class="date">{
-                                          moment(post.zlins_dttm).format('MMMM Do YYYY, h:mm:ss a').toString()}</span>
-                                          <span class="time">{moment(post.zlins_dttm).startOf('hour').fromNow()}</span>
+                                             moment(post.zlins_dttm).format('MMMM Do YYYY, h:mm:ss a').toString()}</span>
+                                          <span class="time">{moment(post.zlins_dttm).startOf('minute').fromNow()}</span>
                                        </div>
                                        <div class="timeline-icon">
                                           <a href="javascript:;">&nbsp;</a>
@@ -62,7 +65,10 @@ const Profile = () => {
                                           <div class="timeline-content">
                                              <h2>{post.title}</h2>
                                              {post.content}
-                                             {post.tags}
+                                             {post.tag !== null && post.tag.map(value => (
+                                                <div className="react-tagsinput-tag" style={{marginLeft:"5px"}}>{value}</div>
+                                             )
+                                             )}
                                           </div>
                                           <div class="timeline-likes">
                                              <div class="stats-right">
@@ -111,7 +117,7 @@ const Profile = () => {
                </div>
             </div>
          </div>
-      </div>
+      </div >
    );
 
 }
